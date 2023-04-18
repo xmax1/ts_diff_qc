@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ata-pod
+  namespace: scb-usra
+spec:
+  containers:
+  - name: scb-env-one
+    image: gitlab-registry.nrp-nautilus.io/usra/scb-env-one:latest
+    command: ["/bin/bash", "-c"]
+    args: [". activate base; sleep infinity"]
+    volumeMounts:
+      - mountPath: /scb-usra
+        name: scb-usra
+    resources:
+      limits:
+        memory: 10Gi
+        cpu: "1"
+      requests:
+        memory: 10Gi
+        cpu: "1"
+  volumes:
+  - name: scb-usra
+    persistentVolumeClaim:
+      claimName: scb-usra
