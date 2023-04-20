@@ -14,7 +14,6 @@ spec:
     name: gpu-container
     resources:
       limits:
-        cpu: 1
         nvidia.com/gpu: 1
     volumeMounts:
     - mountPath: /scb-usra
@@ -24,3 +23,5 @@ spec:
   - name: scb-usra
     persistentVolumeClaim:
       claimName: scb-usra
+
+# kubectl config view --minify --flatten

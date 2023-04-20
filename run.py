@@ -3,6 +3,16 @@ from pydantic import BaseModel
 import os
 from cli import add_model
 from rich.pretty import pprint
+"""
+```bash
+docker container ls
+docker container commit c16378f943fe new-image-name:latest
+
+docker image ls
+```
+
+"""
+
 
 class Pyfig(BaseModel):
     """Configuration for the training script."""

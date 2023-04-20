@@ -3,19 +3,21 @@ name = "ts-diff-qc"
 version = "0.1.0"
 description = ""
 authors = ["max <m@foom.dev>"]
-readme = "README.md"
+readme = "readme.md"
 packages = [{include = "ts_diff_qc"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pyfig = {path = "../../modules/pyfig"}
-fire = "^0.5.0"
+# pyfig = {git = "ssh://git@github.com/xmax1/pyfig.git", branch = "main"}
+# pyfig = {path = "../../modules/pyfig"}
 torch = "^2.0.0"
 pytorch-lightning = "^2.0.1.post0"
 accelerate = "^0.18.0"
 rich-argparse = "^1.1.0"
 argcomplete = "^3.0.5"
-
+ipykernel = "^6.22.0"
+pydantic = "^1.10.7"
+lightkube = "^0.12.0"
 
 [build-system]
 requires = ["poetry-core"]

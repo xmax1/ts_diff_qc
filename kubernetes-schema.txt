@@ -1,0 +1,1815 @@
+KIND:     ConfigMap
+VERSION:  v1
+
+DESCRIPTION:
+     ConfigMap holds configuration data for pods to consume.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   binaryData	<map[string]string>
+     BinaryData contains the binary data. Each key must consist of alphanumeric
+     characters, '-', '_' or '.'. BinaryData can contain byte sequences that are
+     not in the UTF-8 range. The keys stored in BinaryData must not overlap with
+     the ones in the Data field, this is enforced during validation process.
+     Using this field will require 1.10+ apiserver and kubelet.
+
+   data	<map[string]string>
+     Data contains the configuration data. Each key must consist of alphanumeric
+     characters, '-', '_' or '.'. Values with non-UTF-8 byte sequences must use
+     the BinaryData field. The keys stored in Data must not overlap with the
+     keys in the BinaryData field, this is enforced during validation process.
+
+   immutable	<boolean>
+     Immutable, if set to true, ensures that data stored in the ConfigMap cannot
+     be updated (only object metadata can be modified). If not set to true, the
+     field can be modified at any time. Defaulted to nil.
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+KIND:     Endpoints
+VERSION:  v1
+
+DESCRIPTION:
+     Endpoints is a collection of endpoints that implement the actual service.
+     Example: Name: "mysvc", Subsets: [
+         {
+           Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],
+           Ports: [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]
+         },
+         {
+           Addresses: [{"ip": "10.10.3.3"}],
+           Ports: [{"name": "a", "port": 93}, {"name": "b", "port": 76}]
+         },
+     ]
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   subsets	<[]Object>
+     The set of all endpoints is the union of all subsets. Addresses are placed
+     into subsets according to the IPs they share. A single address with
+     multiple ports, some of which are ready and some of which are not (because
+     they come from different containers) will result in the address being
+     displayed in different subsets for the different ports. No address will
+     appear in both Addresses and NotReadyAddresses in the same subset. Sets of
+     addresses and ports that comprise a service.
+
+KIND:     Event
+VERSION:  v1
+
+DESCRIPTION:
+     Event is a report of an event somewhere in the cluster. Events have a
+     limited retention time and triggers and messages may evolve with time.
+     Event consumers should not rely on the timing of an event with a given
+     Reason reflecting a consistent underlying trigger, or the continued
+     existence of events with that Reason. Events should be treated as
+     informative, best-effort, supplemental data.
+
+FIELDS:
+   action	<string>
+     What action was taken/failed regarding to the Regarding object.
+
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   count	<integer>
+     The number of times this event has occurred.
+
+   eventTime	<string>
+     Time when this Event was first observed.
+
+   firstTimestamp	<string>
+     The time at which the event was first recorded. (Time of server receipt is
+     in TypeMeta.)
+
+   involvedObject	<Object> -required-
+     The object that this event is about.
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   lastTimestamp	<string>
+     The time at which the most recent occurrence of this event was recorded.
+
+   message	<string>
+     A human-readable description of the status of this operation.
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   reason	<string>
+     This should be a short, machine understandable string that gives the reason
+     for the transition into the object's current status.
+
+   related	<Object>
+     Optional secondary object for more complex actions.
+
+   reportingComponent	<string>
+     Name of the controller that emitted this Event, e.g.
+     `kubernetes.io/kubelet`.
+
+   reportingInstance	<string>
+     ID of the controller instance, e.g. `kubelet-xyzf`.
+
+   series	<Object>
+     Data about the Event series this event represents or nil if it's a
+     singleton Event.
+
+   source	<Object>
+     The component reporting this event. Should be a short machine
+     understandable string.
+
+   type	<string>
+     Type of this event (Normal, Warning), new types could be added in the
+     future
+
+KIND:     LimitRange
+VERSION:  v1
+
+DESCRIPTION:
+     LimitRange sets resource usage limits for each kind of resource in a
+     Namespace.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the limits enforced. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     PersistentVolumeClaim
+VERSION:  v1
+
+DESCRIPTION:
+     PersistentVolumeClaim is a user's request for and claim to a persistent
+     volume
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the desired characteristics of a volume requested by a pod
+     author. More info:
+     https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+
+   status	<Object>
+     Status represents the current information/status of a persistent volume
+     claim. Read-only. More info:
+     https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+
+KIND:     Pod
+VERSION:  v1
+
+DESCRIPTION:
+     Pod is a collection of containers that can run on a host. This resource is
+     created by clients and scheduled onto hosts.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Specification of the desired behavior of the pod. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Most recently observed status of the pod. This data may not be up to date.
+     Populated by the system. Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     PodTemplate
+VERSION:  v1
+
+DESCRIPTION:
+     PodTemplate describes a template for creating copies of a predefined pod.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   template	<Object>
+     Template defines the pods that will be created from this pod template.
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     ReplicationController
+VERSION:  v1
+
+DESCRIPTION:
+     ReplicationController represents the configuration of a replication
+     controller.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     If the Labels of a ReplicationController are empty, they are defaulted to
+     be the same as the Pod(s) that the replication controller manages. Standard
+     object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the specification of the desired behavior of the replication
+     controller. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Status is the most recently observed status of the replication controller.
+     This data may be out of date by some window of time. Populated by the
+     system. Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     ResourceQuota
+VERSION:  v1
+
+DESCRIPTION:
+     ResourceQuota sets aggregate quota restrictions enforced per namespace
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the desired quota.
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Status defines the actual enforced quota and its current usage.
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     Secret
+VERSION:  v1
+
+DESCRIPTION:
+     Secret holds secret data of a certain type. The total bytes of the values
+     in the Data field must be less than MaxSecretSize bytes.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   data	<map[string]string>
+     Data contains the secret data. Each key must consist of alphanumeric
+     characters, '-', '_' or '.'. The serialized form of the secret data is a
+     base64 encoded string, representing the arbitrary (possibly non-string)
+     data value here. Described in https://tools.ietf.org/html/rfc4648#section-4
+
+   immutable	<boolean>
+     Immutable, if set to true, ensures that data stored in the Secret cannot be
+     updated (only object metadata can be modified). If not set to true, the
+     field can be modified at any time. Defaulted to nil.
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   stringData	<map[string]string>
+     stringData allows specifying non-binary secret data in string form. It is
+     provided as a write-only input field for convenience. All keys and values
+     are merged into the data field on write, overwriting any existing values.
+     The stringData field is never output when reading from the API.
+
+   type	<string>
+     Used to facilitate programmatic handling of secret data. More info:
+     https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
+
+KIND:     ServiceAccount
+VERSION:  v1
+
+DESCRIPTION:
+     ServiceAccount binds together: * a name, understood by users, and perhaps
+     by peripheral systems, for an identity * a principal that can be
+     authenticated and authorized * a set of secrets
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   automountServiceAccountToken	<boolean>
+     AutomountServiceAccountToken indicates whether pods running as this service
+     account should have an API token automatically mounted. Can be overridden
+     at the pod level.
+
+   imagePullSecrets	<[]Object>
+     ImagePullSecrets is a list of references to secrets in the same namespace
+     to use for pulling any images in pods that reference this ServiceAccount.
+     ImagePullSecrets are distinct from Secrets because Secrets can be mounted
+     in the pod, but ImagePullSecrets are only accessed by the kubelet. More
+     info:
+     https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   secrets	<[]Object>
+     Secrets is the list of secrets allowed to be used by pods running using
+     this ServiceAccount. More info:
+     https://kubernetes.io/docs/concepts/configuration/secret
+
+KIND:     Service
+VERSION:  v1
+
+DESCRIPTION:
+     Service is a named abstraction of software service (for example, mysql)
+     consisting of local port (for example 3306) that the proxy listens on, and
+     the selector that determines which pods will answer requests sent through
+     the proxy.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the behavior of a service.
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Most recently observed status of the service. Populated by the system.
+     Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     OperatorConfiguration
+VERSION:  acid.zalan.do/v1
+
+DESCRIPTION:
+     <empty>
+
+FIELDS:
+   apiVersion	<string> -required-
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   configuration	<Object> -required-
+
+   kind	<string> -required-
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   status	<map[string]string>
+
+KIND:     postgresql
+VERSION:  acid.zalan.do/v1
+
+DESCRIPTION:
+     <empty>
+
+FIELDS:
+   apiVersion	<string> -required-
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string> -required-
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+
+   status	<map[string]string>
+
+KIND:     PostgresTeam
+VERSION:  acid.zalan.do/v1
+
+DESCRIPTION:
+     <empty>
+
+FIELDS:
+   apiVersion	<string> -required-
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string> -required-
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+
+KIND:     Challenge
+VERSION:  acme.cert-manager.io/v1
+
+DESCRIPTION:
+     Challenge is a type to represent a Challenge request with an ACME server
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+
+   status	<Object>
+
+KIND:     Order
+VERSION:  acme.cert-manager.io/v1
+
+DESCRIPTION:
+     Order is a type to represent an Order with an ACME server
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+
+   status	<Object>
+
+KIND:     Agent
+VERSION:  agent.k8s.elastic.co/v1alpha1
+
+DESCRIPTION:
+     Agent is the Schema for the Agents API.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     AgentSpec defines the desired state of the Agent
+
+   status	<Object>
+     AgentStatus defines the observed state of the Agent
+
+KIND:     ApmServer
+VERSION:  apm.k8s.elastic.co/v1
+
+DESCRIPTION:
+     ApmServer represents an APM Server resource in a Kubernetes cluster.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     ApmServerSpec holds the specification of an APM Server.
+
+   status	<Object>
+     ApmServerStatus defines the observed state of ApmServer
+
+KIND:     ControllerRevision
+VERSION:  apps/v1
+
+DESCRIPTION:
+     ControllerRevision implements an immutable snapshot of state data. Clients
+     are responsible for serializing and deserializing the objects that contain
+     their internal state. Once a ControllerRevision has been successfully
+     created, it can not be updated. The API Server will fail validation of all
+     requests that attempt to mutate the Data field. ControllerRevisions may,
+     however, be deleted. Note that, due to its use by both the DaemonSet and
+     StatefulSet controllers for update and rollback, this object is beta.
+     However, it may be subject to name and representation changes in future
+     releases, and clients should not depend on its stability. It is primarily
+     for internal use by controllers.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   data	<map[string]>
+     Data is the serialized representation of the state.
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   revision	<integer> -required-
+     Revision indicates the revision of the state represented by Data.
+
+KIND:     DaemonSet
+VERSION:  apps/v1
+
+DESCRIPTION:
+     DaemonSet represents the configuration of a daemon set.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     The desired behavior of this daemon set. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     The current status of this daemon set. This data may be out of date by some
+     window of time. Populated by the system. Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     Deployment
+VERSION:  apps/v1
+
+DESCRIPTION:
+     Deployment enables declarative updates for Pods and ReplicaSets.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Specification of the desired behavior of the Deployment.
+
+   status	<Object>
+     Most recently observed status of the Deployment.
+
+KIND:     ReplicaSet
+VERSION:  apps/v1
+
+DESCRIPTION:
+     ReplicaSet ensures that a specified number of pod replicas are running at
+     any given time.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     If the Labels of a ReplicaSet are empty, they are defaulted to be the same
+     as the Pod(s) that the ReplicaSet manages. Standard object's metadata. More
+     info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the specification of the desired behavior of the ReplicaSet.
+     More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Status is the most recently observed status of the ReplicaSet. This data
+     may be out of date by some window of time. Populated by the system.
+     Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     StatefulSet
+VERSION:  apps/v1
+
+DESCRIPTION:
+     StatefulSet represents a set of pods with consistent identities. Identities
+     are defined as:
+     - Network: A single stable DNS and hostname.
+     - Storage: As many VolumeClaims as requested. The StatefulSet guarantees
+     that a given network identity will always map to the same storage identity.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the desired identities of pods in this set.
+
+   status	<Object>
+     Status is the current status of Pods in this StatefulSet. This data may be
+     out of date by some window of time.
+
+KIND:     GitLab
+VERSION:  apps.gitlab.com/v1beta1
+
+DESCRIPTION:
+     GitLab is a complete DevOps platform, delivered in a single application
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Specification of the desired behavior of a GitLab instance
+
+   status	<Object>
+     Most recently observed status of the GitLab instance. It is read-only to
+     the user
+
+KIND:     NebulaCluster
+VERSION:  apps.nebula-graph.io/v1alpha1
+
+DESCRIPTION:
+     <empty>
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+
+   status	<Object>
+
+KIND:     ConfigAuditReport
+VERSION:  aquasecurity.github.io/v1alpha1
+
+DESCRIPTION:
+     ConfigAuditReport is a specification for the ConfigAuditReport resource.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   report	<Object> -required-
+
+KIND:     ExposedSecretReport
+VERSION:  aquasecurity.github.io/v1alpha1
+
+DESCRIPTION:
+     ExposedSecretReport summarizes exposed secrets in plaintext files built
+     into container images.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   report	<Object> -required-
+     Report is the actual exposed secret report data.
+
+KIND:     RbacAssessmentReport
+VERSION:  aquasecurity.github.io/v1alpha1
+
+DESCRIPTION:
+     RbacAssessmentReport is a specification for the RbacAssessmentReport
+     resource.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   report	<Object> -required-
+
+KIND:     VulnerabilityReport
+VERSION:  aquasecurity.github.io/v1alpha1
+
+DESCRIPTION:
+     VulnerabilityReport summarizes vulnerabilities in application dependencies
+     and operating system packages built into container images.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   report	<Object> -required-
+     Report is the actual vulnerability report data.
+
+KIND:     Application
+VERSION:  argoproj.io/v1alpha1
+
+DESCRIPTION:
+     <empty>
+KIND:     AppProject
+VERSION:  argoproj.io/v1alpha1
+
+DESCRIPTION:
+     <empty>
+KIND:     Workflow
+VERSION:  argoproj.io/v1alpha1
+
+DESCRIPTION:
+     <empty>
+KIND:     HorizontalPodAutoscaler
+VERSION:  autoscaling/v2
+
+DESCRIPTION:
+     HorizontalPodAutoscaler is the configuration for a horizontal pod
+     autoscaler, which automatically manages the replica count of any resource
+     implementing the scale subresource based on the metrics specified.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     metadata is the standard object metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     spec is the specification for the behaviour of the autoscaler. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
+
+   status	<Object>
+     status is the current information about the autoscaler.
+
+KIND:     ElasticsearchAutoscaler
+VERSION:  autoscaling.k8s.elastic.co/v1alpha1
+
+DESCRIPTION:
+     ElasticsearchAutoscaler represents an ElasticsearchAutoscaler resource in a
+     Kubernetes cluster.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     ElasticsearchAutoscalerSpec holds the specification of an Elasticsearch
+     autoscaler resource.
+
+   status	<Object>
+
+KIND:     CronJob
+VERSION:  batch/v1
+
+DESCRIPTION:
+     CronJob represents the configuration of a single cron job.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Specification of the desired behavior of a cron job, including the
+     schedule. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Current status of a cron job. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     Job
+VERSION:  batch/v1
+
+DESCRIPTION:
+     Job represents the configuration of a single job.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Specification of the desired behavior of a job. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Current status of a job. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+KIND:     Beat
+VERSION:  beat.k8s.elastic.co/v1beta1
+
+DESCRIPTION:
+     Beat is the Schema for the Beats API.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     BeatSpec defines the desired state of a Beat.
+
+   status	<Object>
+     BeatStatus defines the observed state of a Beat.
+
+KIND:     SealedSecret
+VERSION:  bitnami.com/v1alpha1
+
+DESCRIPTION:
+     SealedSecret is the K8s representation of a "sealed Secret" - a regular k8s
+     Secret that has been sealed (encrypted) using the controller's key.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     SealedSecretSpec is the specification of a SealedSecret
+
+   status	<Object>
+     SealedSecretStatus is the most recently observed status of the
+     SealedSecret.
+
+KIND:     CassandraDatacenter
+VERSION:  cassandra.datastax.com/v1beta1
+
+DESCRIPTION:
+     CassandraDatacenter is the Schema for the cassandradatacenters API
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<>
+     CassandraDatacenterSpec defines the desired state of a CassandraDatacenter
+
+   status	<Object>
+     CassandraDatacenterStatus defines the observed state of CassandraDatacenter
+
+KIND:     DataImportCron
+VERSION:  cdi.kubevirt.io/v1beta1
+
+DESCRIPTION:
+     DataImportCron defines a cron job for recurring polling/importing disk
+     images as PVCs into a golden image namespace
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     DataImportCronSpec defines specification for DataImportCron
+
+   status	<Object>
+     DataImportCronStatus provides the most recently observed status of the
+     DataImportCron
+
+KIND:     DataSource
+VERSION:  cdi.kubevirt.io/v1beta1
+
+DESCRIPTION:
+     DataSource references an import/clone source for a DataVolume
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     DataSourceSpec defines specification for DataSource
+
+   status	<Object>
+     DataSourceStatus provides the most recently observed status of the
+     DataSource
+
+KIND:     DataVolume
+VERSION:  cdi.kubevirt.io/v1beta1
+
+DESCRIPTION:
+     DataVolume is an abstraction on top of PersistentVolumeClaims to allow easy
+     population of those PersistentVolumeClaims with relation to VirtualMachines
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     DataVolumeSpec defines the DataVolume type specification
+
+   status	<Object>
+     DataVolumeStatus contains the current status of the DataVolume
+
+KIND:     CephBlockPoolRadosNamespace
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephBlockPoolRadosNamespace represents a Ceph BlockPool Rados Namespace
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     Spec represents the specification of a Ceph BlockPool Rados Namespace
+
+   status	<>
+     Status represents the status of a CephBlockPool Rados Namespace
+
+KIND:     CephBlockPool
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephBlockPool represents a Ceph Storage Pool
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     NamedBlockPoolSpec allows a block pool to be created with a non-default
+     name. This is more specific than the NamedPoolSpec so we get schema
+     validation on the allowed pool names that can be specified.
+
+   status	<>
+     CephBlockPoolStatus represents the mirroring status of Ceph Storage Pool
+
+KIND:     CephBucketNotification
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephBucketNotification represents a Bucket Notifications
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     BucketNotificationSpec represent the spec of a Bucket Notification
+
+   status	<>
+     Status represents the status of an object
+
+KIND:     CephBucketTopic
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephBucketTopic represents a Ceph Object Topic for Bucket Notifications
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     BucketTopicSpec represent the spec of a Bucket Topic
+
+   status	<>
+     BucketTopicStatus represents the Status of a CephBucketTopic
+
+KIND:     CephClient
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephClient represents a Ceph Client
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     Spec represents the specification of a Ceph Client
+
+   status	<>
+     Status represents the status of a Ceph Client
+
+KIND:     CephCluster
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephCluster is a Ceph storage cluster
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     ClusterSpec represents the specification of Ceph Cluster
+
+   status	<>
+     ClusterStatus represents the status of a Ceph cluster
+
+KIND:     CephFilesystemMirror
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephFilesystemMirror is the Ceph Filesystem Mirror object definition
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     FilesystemMirroringSpec is the filesystem mirroring specification
+
+   status	<Object>
+     Status represents the status of an object
+
+KIND:     CephFilesystem
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephFilesystem represents a Ceph Filesystem
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     FilesystemSpec represents the spec of a file system
+
+   status	<>
+     CephFilesystemStatus represents the status of a Ceph Filesystem
+
+KIND:     CephFilesystemSubVolumeGroup
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephFilesystemSubVolumeGroup represents a Ceph Filesystem SubVolumeGroup
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     Spec represents the specification of a Ceph Filesystem SubVolumeGroup
+
+   status	<>
+     Status represents the status of a CephFilesystem SubvolumeGroup
+
+KIND:     CephNFS
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephNFS represents a Ceph NFS
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     NFSGaneshaSpec represents the spec of an nfs ganesha server
+
+   status	<>
+     Status represents the status of an object
+
+KIND:     CephObjectRealm
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephObjectRealm represents a Ceph Object Store Gateway Realm
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<>
+     ObjectRealmSpec represent the spec of an ObjectRealm
+
+   status	<>
+     Status represents the status of an object
+
+KIND:     CephObjectStore
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephObjectStore represents a Ceph Object Store Gateway
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     ObjectStoreSpec represent the spec of a pool
+
+   status	<>
+     ObjectStoreStatus represents the status of a Ceph Object Store resource
+
+KIND:     CephObjectStoreUser
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephObjectStoreUser represents a Ceph Object Store Gateway User
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     ObjectStoreUserSpec represent the spec of an Objectstoreuser
+
+   status	<>
+     ObjectStoreUserStatus represents the status Ceph Object Store Gateway User
+
+KIND:     CephObjectZoneGroup
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephObjectZoneGroup represents a Ceph Object Store Gateway Zone Group
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     ObjectZoneGroupSpec represent the spec of an ObjectZoneGroup
+
+   status	<>
+     Status represents the status of an object
+
+KIND:     CephObjectZone
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephObjectZone represents a Ceph Object Store Gateway Zone
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     ObjectZoneSpec represent the spec of an ObjectZone
+
+   status	<>
+     Status represents the status of an object
+
+KIND:     CephRBDMirror
+VERSION:  ceph.rook.io/v1
+
+DESCRIPTION:
+     CephRBDMirror represents a Ceph RBD Mirror
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object> -required-
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     RBDMirroringSpec represents the specification of an RBD mirror daemon
+
+   status	<>
+     Status represents the status of an object
+
+KIND:     CertificateRequest
+VERSION:  cert-manager.io/v1
+
+DESCRIPTION:
+     A CertificateRequest is used to request a signed certificate from one of
+     the configured issuers. All fields within the CertificateRequest's `spec`
+     are immutable after creation. A CertificateRequest will either succeed or
+     fail, as denoted by its `status.state` field. A CertificateRequest is a
+     one-shot resource, meaning it represents a single point in time request for
+     a certificate and cannot be re-used.
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object> -required-
+     Desired state of the CertificateRequest resource.
+
+   status	<Object>
+     Status of the CertificateRequest. This is set and managed automatically.
+
