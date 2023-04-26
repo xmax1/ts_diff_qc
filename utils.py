@@ -4,7 +4,7 @@ from typing import Any
 import subprocess
 from rich import print, inspect as rich_inspect
 
-def rinspect(obj: Any, **kwargs):
+def inspect_if(obj: Any, **kwargs):
 	try:
 		rich_inspect(obj, methods=True, **kwargs)
 	except Exception as e:

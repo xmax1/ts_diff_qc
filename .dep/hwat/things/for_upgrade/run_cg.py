@@ -71,7 +71,7 @@ def run(c: Pyfig):
     print(f'🤖 {n_device} GPUs available')
 
     ### model (aka Trainmodel) ### 
-    from hwat import Ansatz_fb
+    from hwat_dep import Ansatz_fb
     from torch import nn
 
     _dummy = torch.randn((1,))
@@ -82,8 +82,8 @@ def run(c: Pyfig):
     model: nn.Module = c.partial(Ansatz_fb).to(device).to(dtype)
 
     ### train step ###
-    from hwat import compute_ke_b, compute_pe_b
-    from hwat import init_r, get_center_points
+    from hwat_dep import compute_ke_b, compute_pe_b
+    from hwat_dep import init_r, get_center_points
 
     center_points = get_center_points(c.data.n_e, c.app.a)
     r = init_r(c.data.n_b, c.data.n_e, center_points, std=0.1)
@@ -97,7 +97,7 @@ def run(c: Pyfig):
 
     ### train ###
     import wandb
-    from hwat import keep_around_points, sample_b
+    from hwat_dep import keep_around_points, sample_b
     from things import compute_metrix
     
     ### add in optimiser

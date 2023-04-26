@@ -10,7 +10,7 @@ import torch
 from torch import Tensor
 from torch.optim import Optimizer
 from torch.utils.data import DataLoader
-from hwat import PyfigDataset
+from hwat_dep import PyfigDataset
 
 from functorch import make_functional_with_buffers, vmap
 from things.for_torch.torch_utils import get_opt, get_scheduler
@@ -18,8 +18,8 @@ from things.utils import npify_tree, compute_metrix
 
 from functools import partial
 
-from hwat import Ansatz_fb as Model
-from hwat import compute_ke_b, compute_pe_b
+from hwat_dep import Ansatz_fb as Model
+from hwat_dep import compute_ke_b, compute_pe_b
 import numpy as np
 from copy import deepcopy
 import pprint

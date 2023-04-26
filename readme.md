@@ -1,0 +1,6 @@
+- [ ] test ramvid
+- [ ] test docker
+- [ ] test docker in ramvid
+- [ ] test kubernetes
+- [ ] test ramvid in docker in kubernetes
+- [ ] lightning template

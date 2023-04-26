@@ -558,7 +558,7 @@ class PyfigDataset(Dataset):
 		
 		ii.sample = partial(sample_b, model= model, n_corr= ii.n_corr, pre= (ii.mode==c.pre_tag), unwrap= c.dist.unwrap)
 
-		from hwat import get_starting_deltar
+		from hwat_dep import get_starting_deltar
 		deltar = get_starting_deltar(ii.sample, ii.data, acc_target= 0.66)
 		ii.deltar = deltar.to(device= device, dtype= dtype)
 		print('dataset:init_dataset deltar ', ii.deltar)
